@@ -6,22 +6,25 @@ from utils import (
     comparar_datas
 )
 
-
 def criar_projeto(nome, descricao, inicio, fim):
     projetos = carregar_projetos()
 
-    # -------- Validações --------
+    #  Validações
     if not validar_nome_projeto(nome):
         return False, "Nome do projeto inválido."
+    print('Nome do projeto válido!')
 
     if not validar_data(inicio):
         return False, "Data de início inválida. Use DD/MM/YYYY."
+    print('Data de ínicio válida!')
 
     if not validar_data(fim):
         return False, "Data final inválida. Use DD/MM/YYYY."
+    print('Data final válida!')
 
     if not comparar_datas(inicio, fim):
         return False, "A data final deve ser igual ou posterior à inicial."
+    print('A data final e inicial são válidas e foram salvas!')
 
     # Verifica duplicidade
     for p in projetos:
@@ -29,9 +32,15 @@ def criar_projeto(nome, descricao, inicio, fim):
             return False, "Já existe um projeto com esse nome."
 
     # -------- Criar usando o MODELOS --------
+    if descricao:
+        descricao_final = descricao
+    else:
+        descricao_final = ""
+        print("Não existe uma descrição de projeto!")
+
     novo = modelo_projeto(
         nome=nome,
-        descricao=descricao if descricao else "",
+        descricao=descricao_final,
         inicio=inicio,
         fim=fim
     )
@@ -39,7 +48,6 @@ def criar_projeto(nome, descricao, inicio, fim):
     projetos.append(novo)
     salvar_projetos(projetos)
     return True, "Projeto criado com sucesso."
-
 
 def listar_projetos():
     return carregar_projetos()
