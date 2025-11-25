@@ -9,7 +9,7 @@ from utils import (
 def criar_projeto(nome, descricao, inicio, fim):
     projetos = carregar_projetos()
 
-    #  Validações
+    #  Validações.
     if not validar_nome_projeto(nome):
         return False, "Nome do projeto inválido."
     print('Nome do projeto válido!')
@@ -31,7 +31,7 @@ def criar_projeto(nome, descricao, inicio, fim):
         if p["nome"].lower() == nome.lower():
             return False, "Já existe um projeto com esse nome."
 
-    # -------- Criar usando o MODELOS --------
+    #Criar usando o MODELOS
     if descricao:
         descricao_final = descricao
     else:
