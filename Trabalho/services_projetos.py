@@ -10,7 +10,7 @@ from utils import (
 def criar_projeto(nome, descricao, inicio, fim):
     projetos = carregar_projetos()
 
-    #Validações 
+    # -------- Validações --------
     if not validar_nome_projeto(nome):
         return False, "Nome do projeto inválido."
 
@@ -28,16 +28,10 @@ def criar_projeto(nome, descricao, inicio, fim):
         if p["nome"].lower() == nome.lower():
             return False, "Já existe um projeto com esse nome."
 
-    #Criar usando o MODELO 
-    if not descricao:
-        descricao_final = ""
-        print("Descrição vazia (permitido).")
-    else:
-        descricao_final = descricao
-
+    # -------- Criar usando o MODELS --------
     novo = modelo_projeto(
         nome=nome,
-        descricao=descricao_final,
+        descricao=descricao if descricao else "",
         inicio=inicio,
         fim=fim
     )
@@ -48,48 +42,21 @@ def criar_projeto(nome, descricao, inicio, fim):
 
 
 def listar_projetos():
-    projetos = carregar_projetos()
-
-    if not projetos:
-        return False, "Nenhum projeto cadastrado."
-
-    return True, projetos
+    return carregar_projetos()
 
 
 def buscar_projetos(termo):
-    termo = termo.lower().strip()
-
-    if not termo:
-        return False, "Digite algo para buscar."
-
+    termo = termo.lower()
     projetos = carregar_projetos()
-
-    if not projetos:
-        return False, "Nenhum projeto cadastrado."
-
-    encontrados = []
-
-    for p in projetos:
-        nome_proj = str(p.get("nome", "")).lower()
-        if termo in nome_proj:
-            encontrados.append(p)
-
-    if not encontrados:
-        return False, "Nenhum projeto encontrado para esse termo."
-
-    return True, encontrados
+    return [p for p in projetos if termo in p["nome"].lower()]
 
 
 def atualizar_projeto(nome_antigo, novo_nome=None, nova_descricao=None,
                       novo_inicio=None, novo_fim=None):
 
     projetos = carregar_projetos()
-    nome_antigo = nome_antigo.lower().strip()
+    nome_antigo = nome_antigo.lower()
 
-    if not nome_antigo:
-        return False, "O nome antigo não pode ser vazio."
-
-    # Localizar o projeto
     projeto = None
     for p in projetos:
         if p["nome"].lower() == nome_antigo:
@@ -99,7 +66,7 @@ def atualizar_projeto(nome_antigo, novo_nome=None, nova_descricao=None,
     if not projeto:
         return False, "Projeto não encontrado."
 
-    #Atualizações com validação
+    # ---- Atualizações com validação ----
     if novo_nome:
         if not validar_nome_projeto(novo_nome):
             return False, "Nome inválido."
@@ -135,27 +102,13 @@ def atualizar_projeto(nome_antigo, novo_nome=None, nova_descricao=None,
 
 
 def remover_projeto(nome):
-    if not validar_nome_projeto(nome):
-        return False, "Nome inválido."
-
     projetos = carregar_projetos()
-
-    if not projetos:
-        return False, "Nenhum projeto cadastrado."
-
     nome = nome.lower()
-    removido = False
-    nova_lista = []
-
 
     for p in projetos:
         if p["nome"].lower() == nome:
-            removido = True
-        else:
-            nova_lista.append(p)
+            projetos.remove(p)
+            salvar_projetos(projetos)
+            return True, "Projeto removido com sucesso."
 
-    if not removido:
-        return False, "Projeto não encontrado."
-
-    salvar_projetos(nova_lista)
-    return True, "Projeto removido com sucesso."
+    return False, "Projeto não encontrado."
