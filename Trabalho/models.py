@@ -12,7 +12,7 @@ def modelo_usuario(nome, email, sexo, idade, cpf):
     }
 
 
-# ---------- TAREFAS ----------
+# TAREFAS
 def modelo_tarefa(titulo, projeto, responsavel, status, prazo):
     """
     Estrutura base de uma tarefa.
@@ -26,7 +26,7 @@ def modelo_tarefa(titulo, projeto, responsavel, status, prazo):
     }
 
 
-# ---------- PROJETOS ----------
+#  PROJETOS 
 def modelo_projeto(nome, descricao, inicio, fim):
     """
     Estrutura base de um projeto.
