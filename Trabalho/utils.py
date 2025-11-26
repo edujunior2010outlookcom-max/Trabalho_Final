@@ -87,4 +87,3 @@ def formatar_nome(nome: str) -> str:
 def formatar_email(email: str) -> str:
     """Email sempre minúsculo."""
     return email.strip().lower()
-
