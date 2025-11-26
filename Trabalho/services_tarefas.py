@@ -132,4 +132,3 @@ def remover_tarefa(titulo):
             return True, "Tarefa removida com sucesso."
 
     return False, "Tarefa não encontrada."
-
