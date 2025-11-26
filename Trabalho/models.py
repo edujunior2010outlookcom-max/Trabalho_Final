@@ -10,7 +10,7 @@ def modelo_usuario(nome, email, sexo, idade, cpf):
         "idade": int(idade),
         "cpf": cpf
     }
-return 0
+    
 
 # TAREFAS
 def modelo_tarefa(titulo, projeto, responsavel, status, prazo):
