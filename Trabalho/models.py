@@ -37,4 +37,3 @@ def modelo_projeto(nome, descricao, inicio, fim):
         "inicio": inicio,   # datas no formato YYYY-MM-DD ou DD/MM/YYYY
         "fim": fim
     }
-
