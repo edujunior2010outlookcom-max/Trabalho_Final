@@ -6,7 +6,7 @@ from ui import (
     menu_relatorios
 )
 
-from services_usuario import (
+from services_usuarios import (
     criar_usuario,
     listar_usuarios,
     buscar_usuarios,
