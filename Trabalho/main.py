@@ -1,4 +1,3 @@
-
 from ui import (
     menu_principal,
     menu_usuario,
@@ -44,7 +43,9 @@ def main():
     while True:
         opc = menu_principal()
 
-        # ===================== USUÁRIOS ======================
+        # ===========================================================
+        #                        USUÁRIOS
+        # ===========================================================
         if opc == "1":
             while True:
                 u = menu_usuario()
@@ -53,30 +54,39 @@ def main():
                     nome = input("Nome: ")
                     email = input("Email: ")
                     sexo = input("Sexo (M/F/O): ")
-                    idade = input("Idade(Somente números): ")
-                    cpf = input("CPF(Somente números): ")
+                    idade = input("Idade (somente números): ")
+                    cpf = input("CPF (somente números): ")
+
                     ok, msg = criar_usuario(nome, email, sexo, idade, cpf)
                     print(msg)
 
                 elif u == "2":
                     usuarios = listar_usuarios()
-                    for usr in usuarios:
-                        print(usr)
+                    if not usuarios:
+                        print("Nenhum usuário cadastrado.")
+                    else:
+                        for usr in usuarios:
+                            print(usr)
 
                 elif u == "3":
                     termo = input("Buscar por: ")
                     tipo = input("Tipo (nome/email): ")
                     encontrados = buscar_usuarios(termo, tipo)
-                    for usr in encontrados:
-                        print(usr)
+
+                    if not encontrados:
+                        print("Nenhum usuário encontrado.")
+                    else:
+                        for usr in encontrados:
+                            print(usr)
 
                 elif u == "4":
                     ident = input("Nome ou email do usuário: ")
-                    novo_nome = input("Novo nome (ou enter): ") or None
-                    novo_email = input("Novo email (ou enter): ") or None
-                    novo_sexo = input("Novo sexo (ou enter): ") or None
-                    nova_idade = input("Nova idade (ou enter): ") or None
-                    novo_cpf = input("Novo CPF (ou enter): ") or None
+
+                    novo_nome = input("Novo nome (enter p/ manter): ") or None
+                    novo_email = input("Novo email (enter p/ manter): ") or None
+                    novo_sexo = input("Novo sexo (enter p/ manter): ") or None
+                    nova_idade = input("Nova idade (enter p/ manter): ") or None
+                    novo_cpf = input("Novo CPF (enter p/ manter): ") or None
 
                     ok, msg = atualizar_usuario(
                         ident, novo_nome, novo_email,
@@ -91,11 +101,14 @@ def main():
 
                 elif u == "6":
                     break
+
                 else:
                     print("Opção inválida!")
 
 
-        # ============== PROJETOS ===============
+        # ===========================================================
+        #                        PROJETOS
+        # ===========================================================
         elif opc == "2":
             while True:
                 p = menu_projetos()
@@ -103,24 +116,45 @@ def main():
                 if p == "1":
                     nome = input("Nome do projeto: ")
                     desc = input("Descrição: ")
-                    ok, msg = criar_projeto(nome, desc)
+                    inicio = input("Data de início (DD/MM/YYYY): ")
+                    fim = input("Data final (DD/MM/YYYY): ")
+
+                    ok, msg = criar_projeto(nome, desc, inicio, fim)
                     print(msg)
 
                 elif p == "2":
-                    for proj in listar_projetos():
-                        print(proj)
+                    projetos = listar_projetos()
+                    if not projetos:
+                        print("\nNenhum projeto cadastrado.")
+                    else:
+                        for proj in projetos:
+                            print(proj)
 
                 elif p == "3":
                     termo = input("Buscar projeto: ")
                     encontrados = buscar_projetos(termo)
-                    for proj in encontrados:
-                        print(proj)
+
+                    if not encontrados:
+                        print("Nenhum projeto encontrado.")
+                    else:
+                        for proj in encontrados:
+                            print(proj)
 
                 elif p == "4":
-                    nome_velho = input("Nome atual: ")
-                    novo_nome = input("Novo nome: ") or None
-                    nova_desc = input("Nova descrição: ") or None
-                    ok, msg = atualizar_projeto(nome_velho, novo_nome, nova_desc)
+                    nome_velho = input("Nome atual do projeto: ")
+
+                    novo_nome = input("Novo nome (Enter p/ manter): ") or None
+                    nova_desc = input("Nova descrição (Enter p/ manter): ") or None
+                    novo_inicio = input("Nova data de início (DD/MM/YYYY ou Enter): ") or None
+                    novo_fim = input("Nova data final (DD/MM/YYYY ou Enter): ") or None
+
+                    ok, msg = atualizar_projeto(
+                        nome_velho,
+                        novo_nome,
+                        nova_desc,
+                        novo_inicio,
+                        novo_fim
+                    )
                     print(msg)
 
                 elif p == "5":
@@ -130,40 +164,52 @@ def main():
 
                 elif p == "6":
                     break
+
                 else:
                     print("Opção inválida!")
 
 
-        # =================== TAREFAS ======================
+        # ===========================================================
+        #                        TAREFAS
+        # ===========================================================
         elif opc == "3":
             while True:
                 t = menu_tarefas()
 
                 if t == "1":
-                    titulo = input("Título: ")
-                    projeto = input("Projeto: ")
+                    titulo = input("Título da tarefa: ")
+                    projeto = input("Projeto vinculado: ")
                     responsavel = input("Responsável: ")
-                    status = input("Status: ")
+                    status = input("Status (pendente/andamento/concluída): ")
                     prazo = input("Prazo (AAAA-MM-DD): ")
+
                     ok, msg = criar_tarefa(titulo, projeto, responsavel, status, prazo)
                     print(msg)
 
                 elif t == "2":
-                    for tar in listar_todas():
-                        print(tar)
+                    tarefas = listar_todas()
+                    if not tarefas:
+                        print("Nenhuma tarefa cadastrada.")
+                    else:
+                        for tar in tarefas:
+                            print(tar)
 
                 elif t == "3":
                     ident = input("Título da tarefa: ")
 
-                    novo_titulo = input("Novo título (ou Enter): ") or None
-                    novo_projeto = input("Novo projeto (ou Enter): ") or None
-                    novo_resp = input("Novo responsável (ou Enter): ") or None
-                    novo_status = input("Novo status (ou Enter): ") or None
+                    novo_titulo = input("Novo título (Enter p/ manter): ") or None
+                    novo_projeto = input("Novo projeto (Enter p/ manter): ") or None
+                    novo_resp = input("Novo responsável (Enter p/ manter): ") or None
+                    novo_status = input("Novo status (Enter p/ manter): ") or None
                     novo_prazo = input("Novo prazo (AAAA-MM-DD ou Enter): ") or None
 
                     ok, msg = atualizar_tarefa(
-                        ident, novo_titulo, novo_projeto,
-                        novo_resp, novo_status, novo_prazo
+                        ident,
+                        novo_titulo,
+                        novo_projeto,
+                        novo_resp,
+                        novo_status,
+                        novo_prazo
                     )
                     print(msg)
 
@@ -174,11 +220,14 @@ def main():
 
                 elif t == "5":
                     break
+
                 else:
                     print("Opção inválida!")
 
 
-        # ===================== RELATÓRIOS ============
+        # ===========================================================
+        #                        RELATÓRIOS
+        # ===========================================================
         elif opc == "4":
             while True:
                 r = menu_relatorios()
@@ -194,6 +243,7 @@ def main():
 
                 elif r == "4":
                     break
+
                 else:
                     print("Opção inválida!")
 
@@ -208,4 +258,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
