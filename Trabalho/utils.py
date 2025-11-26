@@ -1,3 +1,5 @@
+#VALIDAÇÕES E FILTROS
+
 import datetime
 import re
 
