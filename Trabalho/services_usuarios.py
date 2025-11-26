@@ -1,4 +1,4 @@
-#CADASTRO E FUNÇÃOES DE USUARIO
+#CADASTRO E OPÇÕES DE USUARIO
 
 from storage import carregar_usuarios, salvar_usuarios
 from models import modelo_usuario
