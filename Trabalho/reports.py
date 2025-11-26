@@ -1,9 +1,8 @@
 from storage import carregar_usuarios, carregar_projetos, carregar_tarefas
 
 
-# ============================
 # RELATÓRIO DE USUÁRIOS
-# ============================
+
 def relatorio_usuarios():
     usuarios = carregar_usuarios()
 
@@ -22,9 +21,9 @@ def relatorio_usuarios():
         print("-" * 40)
 
 
-# ============================
+
 # RELATÓRIO DE PROJETOS
-# ============================
+
 def relatorio_projetos():
     projetos = carregar_projetos()
     tarefas = carregar_tarefas()
@@ -53,9 +52,9 @@ def relatorio_projetos():
         print("-" * 40)
 
 
-# ============================
+
 # RELATÓRIO DE TAREFAS
-# ============================
+
 def relatorio_tarefas():
     tarefas = carregar_tarefas()
 
