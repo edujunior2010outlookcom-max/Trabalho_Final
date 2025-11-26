@@ -1,4 +1,4 @@
-#SEVIÇOS DE TAREFA. BASE DAS FUNÇÕES DE TAREFAS
+#SEVIÇOS DE TAREFA. CRIAÇÃO E CADASTRO DE TAREFAS
 
 from storage import carregar_tarefas, salvar_tarefas
 from models import modelo_tarefa
