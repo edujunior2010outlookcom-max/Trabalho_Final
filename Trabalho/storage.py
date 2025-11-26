@@ -22,7 +22,7 @@ def carregar_usuarios():
 
 
 def salvar_usuarios(lista_usuarios):
-    """Salva a lista de usuários no arquivo usuarios.json."""
+    """Salva a lista de usuários no arquivo usuarios.json.""" 
     with open(CAMINHO_USUARIOS, "w", encoding="utf-8") as f:
         json.dump(lista_usuarios, f, indent=4, ensure_ascii=False)
 
