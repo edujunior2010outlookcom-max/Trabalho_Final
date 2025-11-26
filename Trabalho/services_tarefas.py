@@ -1,4 +1,3 @@
-#base das tarefas com json
 from storage import carregar_tarefas, salvar_tarefas
 from models import modelo_tarefa
 from utils import (
