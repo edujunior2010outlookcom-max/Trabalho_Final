@@ -125,4 +125,3 @@ def remover_usuario(identificador):
             return True, "Usuário removido com sucesso."
 
     return False, "Usuário não encontrado."
-
