@@ -11,7 +11,7 @@ CAMINHO_USUARIOS = os.path.join(CAMINHO_DATA, "usuarios.json")
 
 
 def carregar_usuarios():
-    """Lê o arquivo usuarios.json e retorna a lista de usuários."""
+    """Lê o arquivo usuarios.json e retorna a lista de usuários.""" 
     try:
         with open(CAMINHO_USUARIOS, "r", encoding="utf-8") as f:
             return json.load(f)
