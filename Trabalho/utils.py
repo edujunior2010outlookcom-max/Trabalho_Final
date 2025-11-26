@@ -5,7 +5,7 @@ import re
 
 
 def validar_email(email: str) -> bool:
-    """Verifica se o email possui formato válido."""
+    """Verifica se o email possui formato válido.""" 
     padrao = r'^[\w\.-]+@[\w\.-]+\.\w+$'
     return bool(re.match(padrao, email))
 
