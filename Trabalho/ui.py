@@ -47,4 +47,3 @@ def menu_relatorios():
     print("[3] - Tarefas detalhadas")
     print("[4] - Voltar")
     return input("Escolha uma opção: ")
-
