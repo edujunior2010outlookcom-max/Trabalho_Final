@@ -1,6 +1,6 @@
 import json
 import os
-
+#aba de gerenciamento de armazenamento
 
 CAMINHO_DATA = os.path.join(os.path.dirname(__file__), "data")
 
