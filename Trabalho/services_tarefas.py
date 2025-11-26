@@ -12,7 +12,6 @@ def listar_todas():
 def criar_tarefa(titulo, projeto, responsavel, status, prazo):
     tarefas = carregar_tarefas()
 
-    # ----- VALIDAÇÕES -----
     if not validar_titulo_tarefa(titulo):
         return False, "O título não pode ser vazio."
 
@@ -22,12 +21,10 @@ def criar_tarefa(titulo, projeto, responsavel, status, prazo):
     if not validar_prazo(prazo):
         return False, "O prazo deve estar no formato YYYY-MM-DD."
 
-    # (Opcional) Verificar se já existe tarefa igual
     for t in tarefas:
         if t["titulo"].lower() == titulo.lower():
             return False, "Já existe uma tarefa com esse título."
 
-    # ----- CRIAÇÃO USANDO MODELO -----
     nova = modelo_tarefa(
         titulo=titulo,
         projeto=projeto,
@@ -41,9 +38,6 @@ def criar_tarefa(titulo, projeto, responsavel, status, prazo):
     return True, "Tarefa cadastrada com sucesso."
 
 
-# -----------------------------------
-# LISTAGENS
-# -----------------------------------
 def listar_tarefas():
     return carregar_tarefas()
 
@@ -63,9 +57,6 @@ def listar_por_status(status):
     return [t for t in tarefas if t["status"].lower() == status.lower()]
 
 
-# -----------------------------------
-# ATUALIZAR
-# -----------------------------------
 def atualizar_tarefa(titulo, novo_titulo=None, novo_projeto=None,
                      novo_responsavel=None, novo_status=None, novo_prazo=None):
 
@@ -81,7 +72,7 @@ def atualizar_tarefa(titulo, novo_titulo=None, novo_projeto=None,
     if not tarefa:
         return False, "Tarefa não encontrada."
 
-    # ---- Campos opcionais ----
+
     if novo_titulo:
         if not validar_titulo_tarefa(novo_titulo):
             return False, "Título inválido."
@@ -107,9 +98,6 @@ def atualizar_tarefa(titulo, novo_titulo=None, novo_projeto=None,
     return True, "Tarefa atualizada com sucesso."
 
 
-# -----------------------------------
-# CONCLUIR / REABRIR
-# -----------------------------------
 def concluir_tarefa(titulo):
     return atualizar_tarefa(titulo, novo_status="concluída")
 
@@ -118,9 +106,7 @@ def reabrir_tarefa(titulo):
     return atualizar_tarefa(titulo, novo_status="pendente")
 
 
-# -----------------------------------
-# REMOVER
-# -----------------------------------
+
 def remover_tarefa(titulo):
     tarefas = carregar_tarefas()
     titulo_lower = titulo.lower()
