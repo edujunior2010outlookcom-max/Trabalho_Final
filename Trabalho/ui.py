@@ -1,4 +1,3 @@
-#MENUS GERAIS
 
 def menu_principal():
     print("\n======= MENU PRINCIPAL =======")
