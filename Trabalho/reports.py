@@ -1,7 +1,6 @@
 from storage import carregar_usuarios, carregar_projetos, carregar_tarefas
 
-#RELATÓRIOS GERAIS!!
-# RELATÓRIO DE USUÁRIOS
+
 
 def relatorio_usuarios():
     usuarios = carregar_usuarios()
@@ -22,7 +21,6 @@ def relatorio_usuarios():
 
 
 
-# RELATÓRIO DE PROJETOS
 
 def relatorio_projetos():
     projetos = carregar_projetos()
@@ -37,12 +35,12 @@ def relatorio_projetos():
     for p in projetos:
         nome = p["nome"]
 
-        # buscar tarefas do projeto
+
         relacionadas = [t for t in tarefas if t["projeto"].lower() == nome.lower()]
         total = len(relacionadas)
         concluidas = sum(1 for t in relacionadas if t["status"].lower() == "concluída")
 
-        # evitar divisão por zero
+
         porcentagem = (concluidas / total * 100) if total > 0 else 0
 
         print(f"Projeto: {p['nome']}")
@@ -53,7 +51,7 @@ def relatorio_projetos():
 
 
 
-# RELATÓRIO DE TAREFAS
+
 
 def relatorio_tarefas():
     tarefas = carregar_tarefas()
@@ -64,7 +62,7 @@ def relatorio_tarefas():
         print("Nenhuma tarefa cadastrada.")
         return
 
-    # separar por status
+  
     pendentes = [t for t in tarefas if t["status"].lower() == "pendente"]
     andamento = [t for t in tarefas if t["status"].lower() == "andamento"]
     concluidas = [t for t in tarefas if t["status"].lower() == "concluída"]
