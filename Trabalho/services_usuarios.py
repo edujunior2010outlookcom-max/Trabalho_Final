@@ -13,7 +13,7 @@ from utils import (
 def criar_usuario(nome, email, sexo, idade, cpf):
     usuarios = carregar_usuarios()
 
-    # ---- Validações ----
+
     if not validar_email(email):
         return False, "E-mail inválido."
 
@@ -28,17 +28,17 @@ def criar_usuario(nome, email, sexo, idade, cpf):
 
     email_formatado = formatar_email(email)
 
-    # Verifica duplicidade de email
+
     for u in usuarios:
         if u["email"].lower() == email_formatado:
             return False, "E-mail já cadastrado."
 
-    # Verifica duplicidade de CPF
+
     for u in usuarios:
         if u["cpf"] == cpf:
             return False, "CPF já cadastrado."
 
-    # Cria modelo
+
     novo = modelo_usuario(
         formatar_nome(nome),
         email_formatado,
@@ -89,7 +89,7 @@ def atualizar_usuario(identificador, novo_nome=None, novo_email=None,
     if not usuario:
         return False, "Usuário não encontrado."
 
-    # Atualizações
+
     if novo_nome:
         usuario["nome"] = formatar_nome(novo_nome)
 
@@ -99,7 +99,7 @@ def atualizar_usuario(identificador, novo_nome=None, novo_email=None,
 
         novo_email = formatar_email(novo_email)
 
-        # duplicidade
+
         for u in usuarios:
             if u is not usuario and u["email"].lower() == novo_email:
                 return False, "E-mail já cadastrado por outro usuário."
