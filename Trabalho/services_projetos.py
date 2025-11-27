@@ -1,4 +1,4 @@
-#CRIAÇÕES E CADASTROS PROJETOS (ABA DE PROJETOS)
+
 
 from storage import carregar_projetos, salvar_projetos
 from models import modelo_projeto
@@ -12,7 +12,7 @@ from utils import (
 def criar_projeto(nome, descricao, inicio, fim):
     projetos = carregar_projetos()
 
-    #  Validações 
+
     if not validar_nome_projeto(nome):
         return False, "Nome do projeto inválido."
 
@@ -25,12 +25,12 @@ def criar_projeto(nome, descricao, inicio, fim):
     if not comparar_datas(inicio, fim):
         return False, "A data final deve ser igual ou posterior à inicial."
 
-    # Verifica duplicidade
+
     for p in projetos:
         if p["nome"].lower() == nome.lower():
             return False, "Já existe um projeto com esse nome."
 
-    # Criar usando o MODELS 
+
     novo = modelo_projeto(
         nome=nome,
         descricao=descricao if descricao else "",
@@ -68,12 +68,12 @@ def atualizar_projeto(nome_antigo, novo_nome=None, nova_descricao=None,
     if not projeto:
         return False, "Projeto não encontrado."
 
-    #  Atualizações com validação 
+ 
     if novo_nome:
         if not validar_nome_projeto(novo_nome):
             return False, "Nome inválido."
 
-        # Verifica duplicidade
+
         for p in projetos:
             if p is not projeto and p["nome"].lower() == novo_nome.lower():
                 return False, "Já existe outro projeto com esse nome."
