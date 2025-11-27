@@ -117,8 +117,8 @@ def main():
                 if p == "1":
                     nome = input("Nome do projeto: ")
                     desc = input("Descrição: ")
-                    inicio = input("Data de início (DD/MM/YYYY): ")
-                    fim = input("Data final (DD/MM/YYYY): ")
+                    inicio = input("Data de início (DD/MM/AAAA): ")
+                    fim = input("Data final (DD/MM/AAAA): ")
 
                     ok, msg = criar_projeto(nome, desc, inicio, fim)
                     print(msg)
@@ -147,8 +147,8 @@ def main():
 
                     novo_nome = input("Novo nome (Enter p/ manter): ") or None
                     nova_desc = input("Nova descrição (Enter p/ manter): ") or None
-                    novo_inicio = input("Nova data de início (DD/MM/YYYY ou Enter): ") or None
-                    novo_fim = input("Nova data final (DD/MM/YYYY ou Enter): ") or None
+                    novo_inicio = input("Nova data de início (DD/MM/AAAA ou Enter): ") or None
+                    novo_fim = input("Nova data final (DD/MM/AAAA ou Enter): ") or None
 
                     ok, msg = atualizar_projeto(
                         nome_velho,
@@ -183,7 +183,7 @@ def main():
                     projeto = input("Projeto vinculado: ")
                     responsavel = input("Responsável: ")
                     status = input("Status (pendente/andamento/concluída): ")
-                    prazo = input("Prazo (AAAA-MM-DD): ")
+                    prazo = input("Prazo (DD/MM/AAAA): ")
 
                     ok, msg = criar_tarefa(titulo, projeto, responsavel, status, prazo)
                     print(msg)
@@ -203,7 +203,7 @@ def main():
                     novo_projeto = input("Novo projeto (Enter p/ manter): ") or None
                     novo_resp = input("Novo responsável (Enter p/ manter): ") or None
                     novo_status = input("Novo status (Enter p/ manter): ") or None
-                    novo_prazo = input("Novo prazo (AAAA-MM-DD ou Enter): ") or None
+                    novo_prazo = input("Novo prazo (DD/MM/AAAA ou Enter): ") or None
 
                     ok, msg = atualizar_tarefa(
                         ident,
