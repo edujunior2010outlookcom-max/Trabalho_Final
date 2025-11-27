@@ -1,4 +1,4 @@
-# SERVIÇOS DE TAREFA. CRIAÇÃO E CADASTRO DE TAREFAS
+
 
 from storage import carregar_tarefas, salvar_tarefas
 from models import modelo_tarefa
@@ -21,7 +21,7 @@ def criar_tarefa(titulo, projeto, responsavel, status, prazo):
     if not validar_status_tarefa(status):
         return False, "Status inválido. Use: pendente, andamento ou concluída."
 
-    # agora usa DD/MM/YYYY
+
     if not validar_prazo(prazo):
         return False, "O prazo deve estar no formato DD/MM/YYYY."
 
