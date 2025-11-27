@@ -1,4 +1,4 @@
-#VALIDAÇÕES E FILTROS 
+# VALIDAÇÕES E FILTROS
 
 import datetime
 import re
@@ -31,7 +31,6 @@ def validar_cpf(cpf: str) -> bool:
     return cpf.isdigit() and len(cpf) == 11
 
 
-
 def validar_nome_projeto(nome: str) -> bool:
     """Nome não pode ser vazio ou apenas espaços."""
     return isinstance(nome, str) and len(nome.strip()) > 0
@@ -56,8 +55,8 @@ def comparar_datas(inicio: str, fim: str) -> bool:
         return False
 
 
-
 STATUS_VALIDOS = ["pendente", "andamento", "concluída"]
+
 
 def validar_titulo_tarefa(titulo: str) -> bool:
     """Título não pode ser vazio."""
@@ -72,13 +71,12 @@ def validar_status_tarefa(status: str) -> bool:
 
 
 def validar_prazo(prazo: str) -> bool:
-    """Prazo deve estar no formato YYYY-MM-DD."""
+    """Prazo deve estar no formato DD/MM/YYYY."""
     try:
-        datetime.datetime.strptime(prazo, "%Y-%m-%d")
+        datetime.datetime.strptime(prazo, "%d/%m/%Y")
         return True
     except ValueError:
         return False
-
 
 
 def formatar_nome(nome: str) -> str:
