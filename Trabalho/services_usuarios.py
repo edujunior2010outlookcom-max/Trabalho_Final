@@ -28,12 +28,17 @@ def criar_usuario(nome, email, sexo, idade, cpf):
 
     email_formatado = formatar_email(email)
 
-    # Verifica duplicidade
+    # Verifica duplicidade de email
     for u in usuarios:
         if u["email"].lower() == email_formatado:
             return False, "E-mail já cadastrado."
 
-    # Criação do modelo
+    # Verifica duplicidade de CPF
+    for u in usuarios:
+        if u["cpf"] == cpf:
+            return False, "CPF já cadastrado."
+
+    # Cria modelo
     novo = modelo_usuario(
         formatar_nome(nome),
         email_formatado,
@@ -57,7 +62,6 @@ def buscar_usuarios(termo, tipo):
     termo = termo.strip().lower()
     tipo = tipo.strip().lower()
 
-    # Garantir que tipo esteja correto
     if tipo not in ["nome", "email"]:
         return []
 
@@ -85,7 +89,7 @@ def atualizar_usuario(identificador, novo_nome=None, novo_email=None,
     if not usuario:
         return False, "Usuário não encontrado."
 
-    # ---- Atualizações com validação ----
+    # Atualizações
     if novo_nome:
         usuario["nome"] = formatar_nome(novo_nome)
 
@@ -95,7 +99,7 @@ def atualizar_usuario(identificador, novo_nome=None, novo_email=None,
 
         novo_email = formatar_email(novo_email)
 
-        # Verifica se outro usuário já usa esse email
+        # duplicidade
         for u in usuarios:
             if u is not usuario and u["email"].lower() == novo_email:
                 return False, "E-mail já cadastrado por outro usuário."
@@ -115,6 +119,12 @@ def atualizar_usuario(identificador, novo_nome=None, novo_email=None,
     if novo_cpf:
         if not validar_cpf(novo_cpf):
             return False, "CPF inválido."
+
+        # duplicidade
+        for u in usuarios:
+            if u is not usuario and u["cpf"] == novo_cpf:
+                return False, "CPF já cadastrado por outro usuário."
+
         usuario["cpf"] = novo_cpf
 
     salvar_usuarios(usuarios)
