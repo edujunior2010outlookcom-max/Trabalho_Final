@@ -1,4 +1,4 @@
-#SEVIÇOS DE TAREFA. CRIAÇÃO E CADASTRO DE TAREFAS
+# SERVIÇOS DE TAREFA. CRIAÇÃO E CADASTRO DE TAREFAS
 
 from storage import carregar_tarefas, salvar_tarefas
 from models import modelo_tarefa
@@ -11,6 +11,7 @@ from utils import (
 def listar_todas():
     return carregar_tarefas()
 
+
 def criar_tarefa(titulo, projeto, responsavel, status, prazo):
     tarefas = carregar_tarefas()
 
@@ -20,8 +21,9 @@ def criar_tarefa(titulo, projeto, responsavel, status, prazo):
     if not validar_status_tarefa(status):
         return False, "Status inválido. Use: pendente, andamento ou concluída."
 
+    # agora usa DD/MM/YYYY
     if not validar_prazo(prazo):
-        return False, "O prazo deve estar no formato YYYY-MM-DD."
+        return False, "O prazo deve estar no formato DD/MM/YYYY."
 
     for t in tarefas:
         if t["titulo"].lower() == titulo.lower():
@@ -72,8 +74,7 @@ def atualizar_tarefa(titulo, novo_titulo=None, novo_projeto=None,
             break
 
     if not tarefa:
-        return False, "Tarefa não encontrada."
-
+        return False, "Tarefa não encontrado."
 
     if novo_titulo:
         if not validar_titulo_tarefa(novo_titulo):
@@ -93,7 +94,7 @@ def atualizar_tarefa(titulo, novo_titulo=None, novo_projeto=None,
 
     if novo_prazo:
         if not validar_prazo(novo_prazo):
-            return False, "O prazo deve estar no formato YYYY-MM-DD."
+            return False, "O prazo deve estar no formato DD/MM/YYYY."
         tarefa["prazo"] = novo_prazo
 
     salvar_tarefas(tarefas)
@@ -106,7 +107,6 @@ def concluir_tarefa(titulo):
 
 def reabrir_tarefa(titulo):
     return atualizar_tarefa(titulo, novo_status="pendente")
-
 
 
 def remover_tarefa(titulo):
